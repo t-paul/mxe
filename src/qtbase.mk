@@ -8,7 +8,7 @@ $(PKG)_CHECKSUM := faf4f33aa7e8dabcdcdf5f10824263beebbccd96
 $(PKG)_SUBDIR   := $(PKG)-opensource-src-$($(PKG)_VERSION)
 $(PKG)_FILE     := $(PKG)-opensource-src-$($(PKG)_VERSION).tar.xz
 $(PKG)_URL      := http://download.qt-project.org/official_releases/qt/5.3/$($(PKG)_VERSION)/submodules/$($(PKG)_FILE)
-$(PKG)_DEPS     := gcc harfbuzz zlib libpng jpeg pcre fontconfig freetype dbus icu4c
+$(PKG)_DEPS     := gcc openssl zlib libpng jpeg pcre fontconfig freetype dbus icu4c
 
 define $(PKG)_UPDATE
     $(WGET) -q -O- http://download.qt-project.org/official_releases/qt/5.1/ | \
@@ -36,6 +36,7 @@ define $(PKG)_BUILD
             -accessibility \
             -nomake examples \
             -nomake tests \
+	    -no-harfbuzz \
 	    -no-sql-db2 \
 	    -no-sql-ibase \
 	    -no-sql-mysql \
@@ -43,6 +44,7 @@ define $(PKG)_BUILD
 	    -no-sql-odbc \
 	    -no-sql-psql \
 	    -no-sql-sqlite2 \
+	    -no-sql-sqlite \
 	    -no-sql-tds \
 	    -no-cups \
             -system-zlib \
@@ -51,7 +53,6 @@ define $(PKG)_BUILD
             -system-sqlite \
             -fontconfig \
             -system-freetype \
-            -system-harfbuzz \
             -system-pcre \
             -openssl-linked \
             -dbus-linked \
