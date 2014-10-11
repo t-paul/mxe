@@ -8,7 +8,7 @@ $(PKG)_CHECKSUM := 6f4401af396069214be2ba15b884361ef540e501
 $(PKG)_SUBDIR   := $(PKG)-$($(PKG)_VERSION)
 $(PKG)_FILE     := $(PKG)-$($(PKG)_VERSION).tar.bz2
 $(PKG)_URL      := http://www.freedesktop.org/software/$(PKG)/release/$($(PKG)_FILE)
-$(PKG)_DEPS     := gcc glib cairo freetype-bootstrap icu4c
+$(PKG)_DEPS     := gcc glib freetype-bootstrap icu4c
 
 define $(PKG)_UPDATE
     $(WGET) -q -O- 'http://cgit.freedesktop.org/harfbuzz/refs/tags' | \
