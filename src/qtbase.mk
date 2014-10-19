@@ -29,7 +29,19 @@ define $(PKG)_BUILD
             -force-pkg-config \
             -release \
             -static \
-            -prefix '/opt/mxe/$(TARGET)/qt5' \
+            -prefix '/opt/mxe' \
+            -bindir '/opt/mxe/$(TARGET)/qt5/bin' \
+            -libdir '/opt/mxe/$(TARGET)/qt5/lib' \
+            -docdir '/opt/mxe/qt5/doc' \
+            -headerdir '/opt/mxe/$(TARGET)/qt5/include' \
+            -datadir '/opt/mxe/qt5' \
+            -archdatadir '/opt/mxe/$(TARGET)/qt5' \
+            -hostdatadir '/opt/mxe/$(TARGET)/qt5' \
+            -plugindir '/opt/mxe/$(TARGET)/qt5/plugins' \
+            -importdir '/opt/mxe/$(TARGET)/qt5/imports' \
+            -translationdir '/opt/mxe/qt5/translations' \
+            -sysconfdir '/etc/xdg' \
+            -examplesdir '/opt/mxe/$(TARGET)/qt5/examples' \
             -icu \
             -opengl desktop \
             -no-glib \
@@ -62,7 +74,7 @@ define $(PKG)_BUILD
     # https://bugreports.qt-project.org/browse/QTBUG-30898
     $(MAKE) -C '$(1)' -j '$(JOBS)' QMAKE="$(1)/bin/qmake CONFIG-='debug debug_and_release'"
     rm -rf '$(PREFIX)/$(TARGET)/qt5'
-    $(MAKE) -C '$(1)' -j 1 install INSTALL_ROOT='$(PREFIX)/$(TARGET)/qt5'
+    $(MAKE) -C '$(1)' -j 1 install INSTALL_ROOT='$(PREFIX)/../..'
     ln -sf '$(PREFIX)/$(TARGET)/qt5/bin/qmake' '$(PREFIX)/bin/$(TARGET)'-qmake-qt5
 
     mkdir            '$(1)/test-qt'
