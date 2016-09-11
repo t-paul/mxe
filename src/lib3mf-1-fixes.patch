@@ -1,0 +1,16 @@
+diff -ur lib3mf.orig/Project/Lib3MFGCC/Makefile.Linux lib3mf/Project/Lib3MFGCC/Makefile.Linux
+--- lib3mf.orig/Project/Lib3MFGCC/Makefile.Linux	2016-02-18 18:35:43.000000000 +0100
++++ lib3mf/Project/Lib3MFGCC/Makefile.Linux	2016-09-23 00:00:48.409135170 +0200
+@@ -782,6 +782,12 @@
+ 
+ release: before_release out_release after_release
+ 
++release_static : before_release out_release_static after_release
++
++.PHONY: out_release_static
++out_release_static: before_release $(OBJ_RELEASE) $(DEP_RELEASE)
++	$(AR) cr $(OUT_RELEASE) $(OBJ_RELEASE)
++
+ out_release: before_release $(OBJ_RELEASE) $(DEP_RELEASE)
+ 	$(LD) -shared $(LIBDIR_RELEASE) $(OBJ_RELEASE)  -o $(OUT_RELEASE) $(LDFLAGS_RELEASE) $(LIB_RELEASE)
+ 
